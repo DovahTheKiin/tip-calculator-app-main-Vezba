@@ -14,6 +14,44 @@ let totalAmountNumber = 0.00;
 tipAmountOutput.innerHTML = tipAmountNumber.toFixed(2);
 totalAmountOutput.innerHTML = totalAmountNumber.toFixed(2);
 
+function hoverOver() {
+  resetButton.classList.add('hover');
+}
+function hoverOut() {
+  resetButton.classList.remove('hover');
+}
+function activeState() {
+  resetButton.classList.add("active-button");
+  resetButton.addEventListener('mouseover', hoverOver);
+  resetButton.addEventListener('mouseout', hoverOut);
+    if(inputBill.value == 0) {
+      resetButton.classList.remove("active-button");
+      resetButton.removeEventListener('mouseover', hoverOver);
+      resetButton.removeEventListener('mouseover', hoverOut);
+    }
+}
+function activeState2() {
+  resetButton.classList.add("active-button");
+  resetButton.addEventListener('mouseover', hoverOver);
+  resetButton.addEventListener('mouseout', hoverOut);
+    if(inputPeople.value == 0) {
+      resetButton.classList.remove("active-button");
+      resetButton.removeEventListener('mouseover', hoverOver);
+      resetButton.removeEventListener('mouseover', hoverOut);
+    }
+}
+
+customInput.addEventListener('input', function(){
+  resetButton.classList.add("active-button");
+  resetButton.addEventListener('mouseover', hoverOver);
+  resetButton.addEventListener('mouseout', hoverOut);
+    if(customInput.value == 0) {
+      resetButton.classList.remove("active-button");
+      resetButton.removeEventListener('mouseover', hoverOver);
+      resetButton.removeEventListener('mouseover', hoverOut);
+    }
+})
+
 const clickHandler = (ev) => {
     let inputBillValue = inputBill.value;
     let inputPeopleValue = inputPeople.value;
@@ -25,12 +63,8 @@ const clickHandler = (ev) => {
         btn.classList.add("active-button");
         resetButton.classList.add("active-button");
         if(resetButton.classList.contains("active-button")) {
-            resetButton.addEventListener('mouseover', function(){
-                resetButton.classList.add('hover');
-            })
-            resetButton.addEventListener('mouseout', function(){
-                resetButton.classList.remove('hover');
-            })
+            resetButton.addEventListener('mouseover', hoverOver);
+            resetButton.addEventListener('mouseout', hoverOut);
         } 
         // else if(!resetButton.classList.contains("active-button")){
         //   resetButton.removeEventListener('mouseover', function(){
@@ -115,6 +149,9 @@ resetButton.addEventListener('click', function() {
 
   inputPeople.style.boxShadow = "none";
   zeroError.classList.remove('active');
+
+  resetButton.removeEventListener('mouseover', hoverOver);
+  resetButton.removeEventListener('mouseover', hoverOut);
 
   for(let i=0;i<tipButton.length;i++){
     if(tipButton[i].classList.contains("active-button")){
